@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Best Mumani ❤️</title>
+
+<style>
+body{
+    margin:0;
+    background:black;
+    color:white;
+    font-family:Arial, sans-serif;
+    text-align:center;
+    overflow:hidden;
+}
+
+h1{
+    margin-top:120px;
+    font-size:40px;
+}
+
+img{
+    width:250px;
+    border-radius:15px;
+    margin-top:20px;
+    border:3px solid white;
+    box-shadow:0 0 20px white;
+}
+
+.popup{
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    background:white;
+    color:black;
+    padding:30px;
+    border-radius:15px;
+    font-size:22px;
+    display:none;
+    z-index:10;
+}
+
+button{
+    margin-top:20px;
+    padding:10px 20px;
+    font-size:16px;
+    border:none;
+    background:black;
+    color:white;
+    cursor:pointer;
+}
+
+canvas{
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:0;
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="confetti"></canvas>
+
+<h1>For My Amazing Mumani</h1>
+
+<!-- Updated image file -->
+<img src="pic.jpg" alt="Mumani">
+
+<div class="popup" id="popup">
+💖 You are the BEST Mumani in the world! 💖  
+<br><br>
+Thank you for always being kind, caring, and amazing.
+<br><br>
+— Yahya
+<br>
+<button onclick="closePopup()">Close</button>
+</div>
+
+<script>
+// popup on open
+window.onload = function(){
+    setTimeout(()=>{
+        document.getElementById("popup").style.display="block";
+    },1000);
+}
+
+// close popup
+function closePopup(){
+    document.getElementById("popup").style.display="none";
+}
+
+// confetti
+const canvas = document.getElementById("confetti");
+const ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let pieces = [];
+
+for(let i=0;i<150;i++){
+    pieces.push({
+        x:Math.random()*canvas.width,
+        y:Math.random()*canvas.height,
+        size:Math.random()*6+4,
+        speed:Math.random()*3+1
+    });
+}
+
+function update(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+
+    ctx.fillStyle="white";
+
+    pieces.forEach(p=>{
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+        ctx.fill();
+
+        p.y+=p.speed;
+
+        if(p.y>canvas.height){
+            p.y=0;
+            p.x=Math.random()*canvas.width;
+        }
+    });
+
+    requestAnimationFrame(update);
+}
+
+update();
+</script>
+
+</body>
+</html>
